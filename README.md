@@ -1,6 +1,6 @@
 # Medieval Crafts Forge — Single Page Application
 
-Uma aplicação web moderna e minimalista para a **Medieval Crafts Forge**, empresa de impressão 3D e personalização de produtos.
+Este projeto é uma aplicação web moderna e minimalista para a **Medieval Crafts Forge**, focada na apresentação de serviços e produtos em impressão 3D. O código está disponível para reutilização e adaptação, podendo servir como base para outros projetos de portfólio, catálogo ou loja online.
 
 ## 📋 Características
 
@@ -10,6 +10,10 @@ Uma aplicação web moderna e minimalista para a **Medieval Crafts Forge**, empr
 - **Sem Build Tools**: Vanilla JavaScript, HTML5, CSS3
 - **Multicanal de Contacto**: WhatsApp, Email, Instagram
 - **Gerenciamento de Dados**: JSONs para Produtos e Testemunhos
+
+## 🌍 Código aberto e reutilização
+
+Este repositório é público e o código pode ser usado, adaptado e reutilizado para outros projetos. Se quiserem aproveitar a estrutura como base para o seu próprio site, fica à vontade — basta manter a referência ao projeto original quando possível.
 
 ## 🎯 Estrutura do Projeto
 
@@ -166,7 +170,7 @@ Contacta via WhatsApp, Email ou Instagram (ver secção Contacto acima).
 
 ## 📄 Licença
 
-© 2025 Medieval Crafts Forge. Todos os direitos reservados.
+Este projeto pode ser reutilizado e adaptado para fins pessoais ou comerciais, com referência ao projeto original.
 
 ---
 
