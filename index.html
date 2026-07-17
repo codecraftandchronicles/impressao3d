@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medieval Crafts Forge - Impressão 3D & Personalização</title>
+    
+    <!-- Bootstrap 5.3 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Header/Navigation -->
+    <header class="navbar-custom">
+        <div class="container-fluid">
+            <div class="navbar-content">
+                <div class="logo-section">
+                    <img src="img/logo.png" alt="Medieval Crafts Forge" class="logo">
+                    <span class="brand-name">MEDIEVAL CRAFTS<br><small>FORGE</small></span>
+                </div>
+                
+                <nav class="nav-menu">
+                    <a href="#servicos" class="nav-link">Serviços</a>
+                    <a href="#produtos" class="nav-link">Produtos</a>
+                    <a href="#testemunhos" class="nav-link">Testemunhos</a>
+                    <a href="#contacto" class="nav-link">Contato</a>
+                </nav>
+                
+                <button class="btn-contact-header" id="btn-contact-header">Solicitar Orçamento</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-background" style="background-image: url('img/bg.jpg')"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <p class="hero-label">IMPRESSÃO 3D & PERSONALIZAÇÃO À MEDIDA</p>
+            <h1 class="hero-title">Medieval Crafts Forge</h1>
+            <p class="hero-subtitle">Do Seu Design para a Realidade</p>
+            <p class="hero-description">Impressão 3D de precisão e personalização exclusiva para troféus, brindes, protótipos e muito mais.</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" id="btn-quote-hero">Solicitar Orçamento</button>
+                <button class="btn btn-secondary" id="btn-explore">Explorar Produtos</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="servicos">
+        <div class="container">
+            <p class="section-label">O QUE FAZEMOS</p>
+            <h2 class="section-title">Criado com Precisão,<br>Entregue com Cuidado</h2>
+            
+            <div class="services-grid" id="services-grid">
+                <!-- Filled by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section class="products" id="produtos">
+        <div class="container">
+            <p class="section-label">NOSSO TRABALHO</p>
+            <h2 class="section-title">Produtos Impressos</h2>
+            
+            <div class="products-grid" id="products-grid">
+                <!-- Filled by JavaScript -->
+            </div>
+            
+            <!-- Botão Carregar Mais -->
+            <div style="text-align: center; margin-top: 3rem;">
+                <button id="load-more-btn" class="btn btn-primary btn-lg" onclick="loadMoreProducts()" style="display: none;">
+                    Carregar Mais Produtos
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testemunhos">
+        <div class="container">
+            <p class="section-label">HISTÓRIAS DE CLIENTES</p>
+            <h2 class="section-title">O Que Os Clientes Dizem</h2>
+            
+            <div class="testimonials-grid" id="testimonials-grid">
+                <!-- Filled by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contacto">
+        <div class="container">
+            <p class="section-label">ENTRE EM CONTACTO</p>
+            <h2 class="section-title">Comece o Seu Projeto</h2>
+            
+            <div class="contact-content">
+                <div class="contact-info">
+                    <p class="contact-intro">Diga-nos sobre a sua ideia e responderemos com um orçamento detalhado em 24 horas. Nenhum projeto é demasiado pequeno ou complexo.</p>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <span class="contact-label">TELEFONE</span>
+                            <p class="contact-value">+351 910 663 727</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <span class="contact-label">EMAIL</span>
+                            <p class="contact-value">preciousabstraction@gmail.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fab fa-instagram"></i>
+                        <div>
+                            <span class="contact-label">INSTAGRAM</span>
+                            <p class="contact-value">@medievalcraftsforge</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contact-channels">
+                    <h3>Escolha Como Contactar</h3>
+                    <div class="channels-grid">
+                        <a href="https://wa.me/351910663727?text=Olá%20Medieval%20Crafts%20Forge%2C%20gostaria%20de%20um%20orçamento" target="_blank" class="channel-btn whatsapp">
+                            <i class="fab fa-whatsapp"></i>
+                            WhatsApp
+                        </a>
+                        <a href="mailto:preciousabstraction@gmail.com" class="channel-btn email">
+                            <i class="fas fa-envelope"></i>
+                            Email
+                        </a>
+                        <a href="https://instagram.com/medievalcraftsforge" target="_blank" class="channel-btn instagram">
+                            <i class="fab fa-instagram"></i>
+                            Instagram
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="img/logo.png" alt="Medieval Crafts Forge" class="footer-logo-img">
+                        <span>Medieval Crafts Forge</span>
+                    </div>
+                    <p class="footer-description">Impressão 3D de precisão e personalização exclusiva, criada com intenção.</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>NAVEGAÇÃO</h4>
+                    <ul>
+                        <li><a href="#servicos">Serviços</a></li>
+                        <li><a href="#produtos">Produtos</a></li>
+                        <li><a href="#testemunhos">Testemunhos</a></li>
+                        <li><a href="#contacto">Contato</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>SERVIÇOS</h4>
+                    <ul>
+                        <li><a href="#servicos">Impressão 3D</a></li>
+                        <li><a href="#servicos">Brindes Corporativos</a></li>
+                        <li><a href="#servicos">Troféus e Prémios</a></li>
+                        <li><a href="#servicos">Personalização</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>CONTACTO</h4>
+                    <p><strong>Telefone:</strong> +351 910 663 727</p>
+                    <p><strong>Email:</strong> preciousabstraction@gmail.com</p>
+                    <p><strong>Instagram:</strong> @medievalcraftsforge</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 Medieval Crafts Forge. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5.3 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Application JS -->
+    <script src="js/app.js"></script>
+</body>
+</html>
