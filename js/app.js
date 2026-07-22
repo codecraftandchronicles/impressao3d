@@ -84,7 +84,7 @@ let appState = {
     contactChannels: {
         whatsapp: {
             name: 'WhatsApp',
-            url: 'https://wa.me/351910663727?text=Olá%20Medieval%20Crafts%20Forge%2C%20gostaria%20de%20um%20orçamento',
+            url: 'https://wa.me/351934651945?text=Olá%20Medieval%20Crafts%20Forge%2C%20gostaria%20de%20um%20orçamento',
             icon: 'fab fa-whatsapp'
         },
         email: {
@@ -379,7 +379,7 @@ function openContactChannel(channel) {
  */
 function requestCustomPiece(nomeReferencia) {
     const texto = encodeURIComponent(`Olá Medieval Crafts Forge, vi o trabalho "${nomeReferencia}" e também gostaria de um personalizado para mim.`);
-    window.open(`https://wa.me/351910663727?text=${texto}`, '_blank');
+    window.open(`https://wa.me/351934651945?text=${texto}`, '_blank');
 }
 
 /**
@@ -387,7 +387,7 @@ function requestCustomPiece(nomeReferencia) {
  */
 function requestUniquePiece(nomeReferencia, preco) {
     const texto = encodeURIComponent(`Olá Medieval Crafts Forge, tenho interesse em comprar a peça única "${nomeReferencia}" (${preco}). Ainda está disponível?`);
-    window.open(`https://wa.me/351910663727?text=${texto}`, '_blank');
+    window.open(`https://wa.me/351934651945?text=${texto}`, '_blank');
 }
 
 /**
