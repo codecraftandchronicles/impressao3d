@@ -3,8 +3,8 @@
     {
       "id": "test-001",
       "descricao": "Solicitei chaveiros personalizados para um evento do grupo de mulheres da igreja. A Medieval Crafts Forge entregou tudo no prazo, mesmo com o tempo curto. Além disso, os produtos foram pintados à mão, com um toque único. Recomendo!",
-      "nome": "Pb. Alexandre Bernardino",
-      "empresa": "MSBN Oeiras - GHD",
+      "nome": "Alexandre Bernardino",
+      "empresa": "null",
       "tipo": "pessoal"
     },
     {
@@ -18,8 +18,8 @@
       "id": "test-004",
       "descricao": "Solicitei a impressão do versículo bíblico 2 Pedro 3:18 (ARC) para decorar a parede do Ministério Infantil. A impressão foi de ótima qualidade, e o resultado final superou as expectativas. Ficou lindo!",
       "nome": "Ana Machado",
-      "empresa": "MSBN Oeiras - Ministério Infantil",
-      "tipo": "empresa"
+      "empresa": "null",
+      "tipo": "pessoal"
     }
   ]
 }
