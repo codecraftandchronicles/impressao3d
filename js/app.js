@@ -16,12 +16,12 @@ let appState = {
             id: 'impressao3d',
             icon: 'fa-cube',
             titulo: 'Impressão 3D',
-            items: [
-                'Tecnologias FDM & Resina',
-                'Materiais: PLA, ABS, PETG, Resina',
-                'Resolução de layer a partir de 0.05 mm',
+            items: [                        
                 'Peças funcionais e decorativas',
-                'Entrega express (24h disponível)'
+                'Prazo médio de produção: 1 a 3 dias úteis',
+				'Levantamento no local',
+				'Envio pelos CTT (1 a 3 dias úteis)',
+				'Fazemos entregas aos sábados, mediante custo adicional'
             ]
         },
         {
@@ -33,19 +33,6 @@ let appState = {
                 'Descontos especiais em volume',
                 'Embalagem personalizada',
                 'Integração de logo e identidade',
-                'Entrega em Portugal'
-            ]
-        },
-        {
-            id: 'trofeus',
-            icon: 'fa-trophy',
-            titulo: 'Troféus e Prémios',
-            items: [
-                'Troféus em acrílico com gravura laser',
-                'Figurines customizadas',
-                'Séries para desporto e eventos',
-                'Personalização a cores completas',
-                'Bases e suportes customizáveis'
             ]
         },
         {
@@ -57,7 +44,7 @@ let appState = {
                 'Conversão de foto para 3D',
                 'Placas de identificação e tags',
                 'Materiais promocionais',
-                'Presentes de casamento e eventos',
+                'Brindes de casamento e eventos',
                 'Peças com várias cores podem ter acréscimo no valor'
             ]
         },
@@ -67,8 +54,7 @@ let appState = {
             titulo: 'Pintura & Dioramas',
             items: [
                 'Pintura 100% à mão, camada a camada',
-                'Dioramas e Maquetes temáticos personalizados',
-                'Cenários: neve, rocha, água, fogo, lama, lava',
+                'Maquetes temáticos personalizados',
                 'Acabamentos com luz LED ou UV',
                 'Peças de coleção, prontas a expor',
                 'Traga a sua peça: pintamos miniaturas e bustos que já tem em casa'
@@ -80,10 +66,18 @@ let appState = {
             titulo: 'Sinalética e Displays',
             items: [
                 'Sistemas de sinalética interior',
-                'Estruturas para exposições',
                 'Unidades de display retail',
                 'Componentes de wayfinding',
                 'Acabamentos personalizados'
+            ]
+        },
+        {
+            id: 'trofeus',
+            icon: 'fa-trophy',
+            titulo: 'Troféus e Prémios',
+            items: [
+                'Troféus de todos os tamanhos e cores',
+                'Bases e suportes customizáveis'
             ]
         }
     ],
@@ -104,7 +98,7 @@ let appState = {
             icon: 'fab fa-instagram'
         }
     },
-    deliveryInfo: 'Prazo médio de produção: 1 a 3 dias úteis, consoante a complexidade da peça e quantidade solicitada. Após produção, entregamos por levantamento no local ou envio pelos CTT (mais 1 a 3 dias úteis). Não fazemos entregas pessoais.'
+    deliveryInfo: 'Prazo médio de produção: 1 a 3 dias úteis, consoante a complexidade da peça e quantidade solicitada. Após produção, entregamos por levantamento no local ou envio pelos CTT (mais 1 a 3 dias úteis). Fazemos entregas aos sábados, mediante custo adicional'
 };
 
 // Initialize application
