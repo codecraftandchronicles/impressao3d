@@ -73,6 +73,13 @@
             <p class="section-label">NOSSO TRABALHO</p>
             <h2 class="section-title">Produtos Impressos</h2>
             
+			<div class="discount-banner">
+            <i class="fas fa-tags"></i>
+            <span><strong>Escalões de desconto:</strong> 1–4 un. sem desconto · 5–9 un. −5% · 10–19 un. −8% · 20+ un. −12%</span>
+			<span><strong>Preços e descontos aplicam-se a filamento PLA opaco (cor sólida).</strong> Filamentos especiais — Silk, Multicolor, Glow in Dark, Wood, Rainbow, Twinkling, PETG, entre outros — estão disponíveis apenas sob encomenda, com orçamento à parte.
+			</span>
+			</div>
+						
             <div class="products-grid" id="products-grid">
                 <!-- Filled by JavaScript -->
             </div>
@@ -82,6 +89,17 @@
                 <button id="load-more-btn" class="btn btn-primary btn-lg" onclick="loadMoreProducts()" style="display: none;">
                     Carregar Mais Produtos
                 </button>
+            </div>
+
+            <!-- Subsecção Portfólio: peças personalizadas já feitas -->
+            <div class="portfolio-divider" style="margin-top: 4rem;">
+                <p class="section-label">PERSONALIZAÇÃO EM DESTAQUE</p>
+                <h2 class="section-title">Trabalhos Personalizados</h2>
+                <p class="section-description">Peças únicas feitas sob encomenda — pintura, montagem e acabamento à medida do cliente.</p>
+            </div>
+
+            <div class="products-grid" id="portfolio-grid">
+                <!-- Filled by JavaScript -->
             </div>
         </div>
     </section>
@@ -108,6 +126,8 @@
                 <div class="contact-info">
                     <p class="contact-intro">Diga-nos sobre a sua ideia e responderemos com um orçamento detalhado em 24 horas. Nenhum projeto é demasiado pequeno ou complexo.</p>
                     
+					<p id="delivery-info"></p>
+
                     <div class="contact-item">
                         <i class="fas fa-phone"></i>
                         <div>

@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medieval Crafts Forge — Calculadora de Preços</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --forge-black:#171310;
+    --iron:#241f19;
+    --plate:#2c261f;
+    --ember:#e0511f;
+    --ember-dim:#8a3216;
+    --brass:#c9a227;
+    --parchment:#ede4d0;
+    --muted:#a89a83;
+    --line:#413827;
+    --ok:#7fae5a;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      radial-gradient(ellipse 900px 500px at 15% -10%, rgba(224,81,31,0.10), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 100% 100%, rgba(201,162,39,0.06), transparent 60%),
+      var(--forge-black);
+    color:var(--parchment);
+    font-family:'Jost',sans-serif;
+    min-height:100vh;
+    padding:40px 20px 60px;
+  }
+  .wrap{max-width:1080px;margin:0 auto;}
+
+  header{
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-between;
+    gap:20px;
+    flex-wrap:wrap;
+    border-bottom:1px solid var(--line);
+    padding-bottom:22px;
+    margin-bottom:34px;
+  }
+  .brand{display:flex;align-items:center;gap:14px;}
+  .brand svg{flex-shrink:0;}
+  .brand h1{
+    font-family:'Cinzel',serif;
+    font-weight:700;
+    font-size:26px;
+    letter-spacing:0.5px;
+    margin:0 0 4px;
+    color:var(--parchment);
+  }
+  .brand p{margin:0;color:var(--muted);font-size:13.5px;letter-spacing:0.3px;}
+  .tagline{
+    font-family:'Cinzel',serif;
+    font-size:12px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--ember);
+  }
+
+  .layout{
+    display:grid;
+    grid-template-columns:1.15fr 0.85fr;
+    gap:26px;
+  }
+  @media (max-width:820px){
+    .layout{grid-template-columns:1fr;}
+  }
+
+  .panel{
+    background:var(--plate);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:26px 26px 8px;
+  }
+
+  .group{margin-bottom:22px;}
+  .group-title{
+    font-family:'Cinzel',serif;
+    font-size:13px;
+    letter-spacing:1.5px;
+    text-transform:uppercase;
+    color:var(--brass);
+    margin:0 0 14px;
+    padding-bottom:8px;
+    border-bottom:1px solid var(--line);
+  }
+
+  .row{
+    display:grid;
+    grid-template-columns:1fr 130px;
+    align-items:center;
+    gap:14px;
+    margin-bottom:14px;
+  }
+  .row label{font-size:14px;color:var(--parchment);}
+  .row .hint{display:block;font-size:11.5px;color:var(--muted);margin-top:2px;}
+
+  .field{
+    position:relative;
+    display:flex;
+    align-items:center;
+  }
+  .field input{
+    width:100%;
+    background:var(--iron);
+    border:1px solid var(--line);
+    border-radius:6px;
+    color:var(--parchment);
+    font-family:'Jost',sans-serif;
+    font-size:14.5px;
+    padding:9px 44px 9px 10px;
+    text-align:right;
+    transition:border-color .15s;
+  }
+  .field input:focus{
+    outline:none;
+    border-color:var(--ember);
+  }
+  .field .unit{
+    position:absolute;
+    right:10px;
+    pointer-events:none;
+    color:var(--muted);
+    font-size:11.5px;
+    letter-spacing:0.2px;
+  }
+  .field.readout{
+    width:100%;
+    background:var(--iron);
+    border:1px solid var(--line);
+    border-radius:6px;
+    color:var(--muted);
+    font-size:14.5px;
+    padding:9px 10px;
+    justify-content:flex-end;
+    font-variant-numeric:tabular-nums;
+  }
+  .const-note{
+    font-size:11.5px;
+    color:var(--muted);
+    background:rgba(201,162,39,0.06);
+    border:1px solid var(--line);
+    border-radius:6px;
+    padding:9px 11px;
+    margin:-4px 0 20px;
+    line-height:1.5;
+  }
+  .tier-table{
+    font-size:11.5px;
+    color:var(--muted);
+    margin:-10px 0 20px;
+    line-height:1.6;
+  }
+  .tier-table b{color:var(--brass);font-weight:600;}
+
+  /* RESULT PANEL */
+  .result-panel{
+    background:var(--iron);
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:28px 26px;
+    position:sticky;
+    top:24px;
+    align-self:start;
+  }
+  .result-panel .group-title{color:var(--brass);}
+
+  .breakdown{margin-bottom:18px;}
+  .b-row{
+    display:flex;
+    justify-content:space-between;
+    font-size:13.5px;
+    padding:7px 0;
+    border-bottom:1px dashed var(--line);
+    color:var(--muted);
+  }
+  .b-row span:last-child{color:var(--parchment);font-variant-numeric:tabular-nums;}
+  .b-row.total{
+    border-bottom:none;
+    padding-top:12px;
+    color:var(--parchment);
+    font-size:14.5px;
+  }
+  .b-row.total span:last-child{font-weight:600;}
+
+  .seam{
+    height:2px;
+    margin:18px 0;
+    border-radius:2px;
+    background:linear-gradient(90deg, transparent, var(--ember) 20%, var(--brass) 50%, var(--ember) 80%, transparent);
+    background-size:200% 100%;
+    animation:glow 4s ease-in-out infinite;
+    opacity:0.85;
+  }
+  @keyframes glow{
+    0%,100%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+  }
+
+  .final{text-align:center;margin-bottom:6px;}
+  .final .label{
+    font-family:'Cinzel',serif;
+    font-size:11.5px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:var(--muted);
+    margin-bottom:8px;
+  }
+  .final .price{
+    font-family:'Cinzel',serif;
+    font-weight:900;
+    font-size:52px;
+    color:var(--parchment);
+    line-height:1;
+    text-shadow:0 0 24px rgba(224,81,31,0.25);
+  }
+  .final .price .cents{font-size:26px;color:var(--muted);}
+
+  .floor-note{
+    display:none;
+    text-align:center;
+    margin-top:12px;
+    font-size:12.5px;
+    color:var(--ember);
+    background:rgba(224,81,31,0.08);
+    border:1px solid var(--ember-dim);
+    border-radius:6px;
+    padding:8px 10px;
+  }
+  .floor-note.show{display:block;}
+
+  .margin-note{
+    text-align:center;
+    font-size:12px;
+    color:var(--muted);
+    margin-top:14px;
+  }
+
+  footer{
+    text-align:center;
+    margin-top:36px;
+    font-size:12px;
+    color:var(--muted);
+    letter-spacing:0.3px;
+  }
+  footer strong{color:var(--brass);font-weight:600;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="brand">
+      <svg width="46" height="46" viewBox="0 0 46 46" fill="none">
+        <path d="M23 2 L41 9 V21 C41 32 33 40 23 44 C13 40 5 32 5 21 V9 Z" stroke="#c9a227" stroke-width="1.4" fill="#241f19"/>
+        <rect x="20.5" y="10" width="5" height="18" rx="1" fill="#e0511f"/>
+        <path d="M14 15 L23 10 L32 15 L23 20 Z" fill="#e0511f" opacity="0.85"/>
+        <rect x="17" y="30" width="12" height="4" rx="1" fill="#c9a227"/>
+      </svg>
+      <div>
+        <h1>Medieval Crafts Forge</h1>
+        <p>Calculadora de preços — impressão 3D sob medida</p>
+      </div>
+    </div>
+    <div class="tagline">Do seu design à realidade</div>
+  </header>
+
+  <div class="layout">
+
+    <div class="panel">
+
+      <div class="group">
+        <p class="group-title">Material</p>
+        <div class="row">
+          <label>Peso da peça
+            <span class="hint">peso total de filamento usado</span>
+          </label>
+          <div class="field"><input type="number" id="weight" value="45" min="0" step="1"><span class="unit">g</span></div>
+        </div>
+        <div class="row">
+          <label>Preço do filamento
+            <span class="hint">custo por kg da bobine</span>
+          </label>
+          <div class="field"><input type="number" id="filamentPrice" value="15" min="0" step="0.5"><span class="unit">€ / kg</span></div>
+        </div>
+        <div class="row">
+          <label>Taxa de falhas / desperdício
+            <span class="hint">margem para impressões falhadas, purga, suportes</span>
+          </label>
+          <div class="field"><input type="number" id="wasteRate" value="10" min="0" step="1"><span class="unit">%</span></div>
+        </div>
+      </div>
+
+      <div class="group">
+        <p class="group-title">Tempo de máquina</p>
+        <div class="row">
+          <label>Tempo de impressão
+            <span class="hint">duração total do print</span>
+          </label>
+          <div class="field"><input type="number" id="printHours" value="6" min="0" step="0.25"><span class="unit">h</span></div>
+        </div>
+        <div class="row">
+          <label>Custo elétrico da impressora
+            <span class="hint">constante — consumo médio × preço da vossa fatura</span>
+          </label>
+          <div class="field readout" id="machineRateReadout">—</div>
+        </div>
+        <p class="const-note">⚡ Constante, não editável aqui: Creality Ender-3 V3 SE (consumo médio ≈0,13 kWh) × preço da energia da vossa fatura Galp (≈0,112 €/kWh, período 29 abr–15 mai 2026). O desgaste e a amortização da impressora deixaram de ser um custo à parte — ficam agora cobertos pela margem de lucro. Para atualizar esta constante (nova fatura ou impressora), editem PRINTER_POWER_KW / ELECTRICITY_PRICE_EUR_KWH no código.</p>
+      </div>
+
+      <div class="group">
+        <p class="group-title">Quantidade & promoção de volume</p>
+        <div class="row">
+          <label>Quantidade
+            <span class="hint">número de peças desta encomenda</span>
+          </label>
+          <div class="field"><input type="number" id="quantity" value="1" min="1" step="1"><span class="unit">un.</span></div>
+        </div>
+        <p class="tier-table">Escalões de desconto: <b>1–4</b> un. sem desconto · <b>5–9</b> −5% · <b>10–19</b> −8% · <b>20+</b> −12%</p>
+      </div>	   
+
+      <div class="group">
+        <p class="group-title">Mão-de-obra & extras</p>
+        <div class="row">
+          <label>Tempo de acabamento
+            <span class="hint">lixar e montar — ajustem por peça se houver pintura/verniz</span>
+          </label>
+          <div class="field"><input type="number" id="laborHours" value="0.1" min="0" step="0.25"><span class="unit">h</span></div>
+        </div>
+        <div class="row">
+          <label>Custo por hora de mão-de-obra
+            <span class="hint">o vosso valor/hora de trabalho</span>
+          </label>
+          <div class="field"><input type="number" id="laborRate" value="5" min="0" step="0.5"><span class="unit">€ / h</span></div>
+        </div>
+        <div class="row">
+          <label>Materiais extra
+            <span class="hint">LEDs, parafusos, inserts, imanes…</span>
+          </label>
+          <div class="field"><input type="number" id="extras" value="0" min="0" step="0.5"><span class="unit">€</span></div>
+        </div>
+      </div>
+
+      <div class="group">
+        <p class="group-title">Regras de preço</p>
+        <div class="row">
+          <label>Margem de lucro
+            <span class="hint">aplicada sobre o custo total</span>
+          </label>
+          <div class="field"><input type="number" id="margin" value="35" min="0" step="5"><span class="unit">%</span></div>
+        </div>
+        <div class="row">
+          <label>Preço mínimo
+            <span class="hint">valor mais baixo que aceitam cobrar</span>
+          </label>
+          <div class="field"><input type="number" id="minPrice" value="0.30" min="0" step="0.5"><span class="unit">€</span></div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="result-panel">
+      <p class="group-title">Orçamento</p>
+
+      <div class="breakdown" id="breakdown">
+        <div class="b-row"><span>Material (com desperdício)</span><span id="r-material">—</span></div>
+        <div class="b-row"><span>Eletricidade (impressora)</span><span id="r-machine">—</span></div>
+        <div class="b-row"><span>Mão-de-obra</span><span id="r-labor">—</span></div>
+        <div class="b-row"><span>Extras</span><span id="r-extras">—</span></div>
+        <div class="b-row total"><span>Custo por unidade</span><span id="r-subtotal">—</span></div>
+      </div>
+
+      <div class="breakdown">
+        <div class="b-row"><span>Preço unitário (c/ margem)</span><span id="r-unit-before">—</span></div>
+        <div class="b-row"><span id="r-discount-label">Desconto de volume</span><span id="r-discount-value">—</span></div>
+        <div class="b-row total"><span>Preço final por unidade</span><span id="r-unit-final">—</span></div>
+      </div>
+	  	  
+		<div class="alert" id="lossAlert" style="display:none; background:rgba(224,81,31,0.15); border:1px solid #e0511f; color:#e0511f; padding:8px 12px; border-radius:6px; margin-bottom:14px; font-size:12.5px;">
+		  ⚠️ <strong>PREJUÍZO!</strong> O preço final (€<span id="alert-price">0,00</span>) é menor que o custo (€<span id="alert-cost">0,00</span>).
+		</div>
+		<div class="alert" id="marginAlert" style="display:none; background:rgba(201,162,39,0.12); border:1px solid #c9a227; color:#c9a227; padding:8px 12px; border-radius:6px; margin-bottom:14px; font-size:12.5px;">
+		  ℹ️ Margem real: <span id="alert-margin">0%</span> (pretendida: <span id="alert-intended-margin">35%</span>%)
+</div>
+
+      <div class="seam"></div>
+
+      <div class="final">
+        <p class="label">Total da encomenda (<span id="r-qty-label">1</span> un.)</p>
+        <div class="price" id="r-final">€0<span class="cents">,00</span></div>
+      </div>
+
+      <div class="floor-note" id="floorNote">⚒ Preço mínimo aplicado — o custo calculado ficava abaixo do vosso valor-base.</div>
+      <p class="margin-note" id="marginNote"></p>
+    </div>
+
+  </div>
+
+  <footer>Bruno Amaral · <strong>910 663 727</strong> · @medievalcraftsforge</footer>
+
+</div>
+
+<script>
+  // ── Constantes (não editáveis pela interface) ──────────────────────────────
+  // Consumo médio da impressora durante a impressão (Creality Ender-3 V3 SE).
+  const PRINTER_POWER_KW = 0.13;
+  // Preço da energia elétrica, calculado a partir da fatura Galp (período 29/04–15/05/2026):
+  // custo da energia consumida (comercialização + tarifa de acesso, com IVA) ÷ kWh consumidos.
+  const ELECTRICITY_PRICE_EUR_KWH = 0.112;
+  const MACHINE_RATE = PRINTER_POWER_KW * ELECTRICITY_PRICE_EUR_KWH; // €/h
+  // Margem mínima aceitável (15%)
+  const MIN_ACCEPTABLE_MARGIN = 15;
+
+  // Escalões de desconto de volume (quantidade mínima → % de desconto sobre o preço unitário)
+  const VOLUME_TIERS = [
+    { min: 20, discount: 12 },
+    { min: 10, discount: 8 },
+    { min: 5,  discount: 5  },
+    { min: 1,  discount: 0  },
+  ];
+  function getVolumeDiscount(qty){
+    for (const tier of VOLUME_TIERS){
+      if (qty >= tier.min) return tier.discount;
+    }
+    return 0;
+  }
+
+  const ids = ['weight','filamentPrice','wasteRate','printHours','laborHours','laborRate','extras','margin','minPrice','quantity'];
+  const inputs = {};
+  ids.forEach(id => {
+    inputs[id] = document.getElementById(id);
+    inputs[id].addEventListener('input', calculate);
+  });
+
+  function eur(n){
+    return n.toLocaleString('pt-PT', {minimumFractionDigits:2, maximumFractionDigits:2});
+  }
+
+  function calculate(){
+    const weight = parseFloat(inputs.weight.value) || 0;
+    const filamentPrice = parseFloat(inputs.filamentPrice.value) || 0;
+    const wasteRate = parseFloat(inputs.wasteRate.value) || 0;
+    const printHours = parseFloat(inputs.printHours.value) || 0;
+    const laborHours = parseFloat(inputs.laborHours.value) || 0;
+    const laborRate = parseFloat(inputs.laborRate.value) || 0;
+    const extras = parseFloat(inputs.extras.value) || 0;
+    const margin = parseFloat(inputs.margin.value) || 0;
+    const minPrice = parseFloat(inputs.minPrice.value) || 0;
+    const quantity = Math.max(1, Math.round(parseFloat(inputs.quantity.value) || 1));
+
+    const baseMaterial = (weight / 1000) * filamentPrice;
+    const materialCost = baseMaterial * (1 + wasteRate / 100);
+    const machineCost = printHours * MACHINE_RATE;
+    const laborCost = laborHours * laborRate;
+
+    // custos por unidade
+    const unitCost = materialCost + machineCost + laborCost + extras;
+    const unitPriceBeforeFloor = unitCost * (1 + margin / 100);
+    const floorApplied = minPrice > unitPriceBeforeFloor && minPrice > 0;
+    const unitPriceAfterFloor = Math.max(unitPriceBeforeFloor, minPrice);
+
+    const discountPct = getVolumeDiscount(quantity);
+    const unitPriceFinal = unitPriceAfterFloor * (1 - discountPct / 100);
+    const totalPrice = unitPriceFinal * quantity;
+
+    document.getElementById('machineRateReadout').textContent = '€' + MACHINE_RATE.toFixed(3).replace('.', ',') + ' / h';
+
+    document.getElementById('r-material').textContent = '€' + eur(materialCost);
+    document.getElementById('r-machine').textContent = '€' + eur(machineCost);
+    document.getElementById('r-labor').textContent = '€' + eur(laborCost);
+    document.getElementById('r-extras').textContent = '€' + eur(extras);
+    document.getElementById('r-subtotal').textContent = '€' + eur(unitCost);
+
+    document.getElementById('r-unit-before').textContent = '€' + eur(unitPriceBeforeFloor);
+    if (discountPct > 0){
+      document.getElementById('r-discount-label').textContent = `Desconto de volume (${discountPct}%)`;
+      document.getElementById('r-discount-value').textContent = '−€' + eur(unitPriceAfterFloor - unitPriceFinal);
+    } else {
+      document.getElementById('r-discount-label').textContent = 'Desconto de volume';
+      document.getElementById('r-discount-value').textContent = '—';
+    }
+    document.getElementById('r-unit-final').textContent = '€' + eur(unitPriceFinal);
+    document.getElementById('r-qty-label').textContent = quantity;
+
+    const [whole, cents] = eur(totalPrice).split(',');
+    document.getElementById('r-final').innerHTML = '€' + whole + '<span class="cents">,' + cents + '</span>';
+
+    document.getElementById('floorNote').classList.toggle('show', floorApplied);
+    document.getElementById('marginNote').textContent = floorApplied
+      ? ''
+      : `Inclui margem de ${margin}%${discountPct > 0 ? ` e desconto de volume de ${discountPct}%` : ''}.`;
+	  	  
+	// --- NOVOS INDICADORES ---
+	// --- ALERTA DE MARGEM (atualizado) ---
+	const actualMarginPct = ((unitPriceFinal - unitCost) / unitCost) * 100;
+	const isBelowMinimum = actualMarginPct < MIN_ACCEPTABLE_MARGIN;
+
+	const marginAlert = document.getElementById('marginAlert');
+	if (isBelowMinimum) {
+	  marginAlert.innerHTML = `ℹ️ Margem real: ${actualMarginPct.toFixed(1)}% (abaixo do lucro mínimo: ${MIN_ACCEPTABLE_MARGIN}% | pretendida: ${margin}%)`;
+	  marginAlert.style.display = 'block';
+	  marginAlert.style.background = 'rgba(224,81,31,0.2)'; // Fundo avermelhado
+	  marginAlert.style.borderColor = '#e0511f';
+	} else if (Math.abs(actualMarginPct - margin) > 0.1) {
+	  marginAlert.innerHTML = `ℹ️ Margem real: ${actualMarginPct.toFixed(1)}% (pretendida: ${margin}%)`;
+	  marginAlert.style.display = 'block';
+	  marginAlert.style.display = 'block';
+	  marginAlert.style.background = 'rgba(201,162,39,0.12)'; // Fundo amarelado (default)
+	  marginAlert.style.borderColor = '#c9a227';
+	} else {
+	  marginAlert.style.display = 'none';
+	} 
+  }
+
+  calculate();
+</script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+{
+   "portfolio": [
+      {
+         "id": "01",
+         "nome": "Elmo Medieval com LED - pintado a mão",
+         "descricao": "Elmo Medieval com LED - pintado a mão",
+         "comprimento": 94.2,
+         "largura": 93.5,
+         "altura": 127.6,
+         "filamento": "PLA",
+         "imagem": "img/produtos/portfolio01.png",
+         "tags": ["Miniatura", "Colecionável", "Peça decorativa", "Frágil", "Com LED"],
+         "preco": 0
+      },
+		{
+         "id": "02",
+         "nome": "Brinde - Chaveiro de Coração vermelho com Rosa dourada - pintado a mão",
+         "descricao": "Brinde - Chaveiro de Coração vermelho com Rosa dourada - pintado a mão",
+         "comprimento": 23,
+         "largura": 106.5,
+         "altura": 85,
+         "filamento": "PLA",
+         "imagem": "img/produtos/portfolio02.png",
+         "tags": ["Chaveiro", "Brinde", "Peça decorativa"],
+         "preco": 0
+      },
+		{
+         "id": "03",
+         "nome": "Chaveiro One Piece - pintado a mão",
+         "descricao": "Chaveiro One Piece - pintado a mão",
+         "comprimento": 45,
+         "largura": 43,
+         "altura": 7,
+         "filamento": "PLA",
+         "imagem": "img/produtos/portfolio03.png",
+         "tags": ["Chaveiro", "Colecionável", "Peça decorativa"],
+         "preco": 0
+      },
+		{
+         "id": "04",
+         "nome": "Miniatura Cavaleiro Teutónico - Edição Gelo, diorama nevado pintado a mão",
+         "descricao": "Miniatura Cavaleiro Teutónico - Edição Gelo, diorama nevado pintado a mão",
+         "comprimento": 84,
+         "largura": 84,
+         "altura": 104.3,
+         "filamento": "PLA",
+         "imagem": "img/produtos/portfolio04.png",
+         "tags": ["Miniatura", "Diorama", "Colecionável", "Frágil"],
+         "preco": 20,
+         "moeda": "€"
+      },
+		{
+         "id": "05",
+         "nome": "Miniatura Cavaleiro Templário com luz UV - Edição Tempestade, diorama pintado a mão",
+         "descricao": "Miniatura Cavaleiro Templário com luz UV - Edição Tempestade, diorama pintado a mão",
+         "comprimento": 78.2,
+         "largura": 78.2,
+         "altura": 104.3,
+         "filamento": "PLA",
+         "imagem": "img/produtos/portfolio05.png",
+         "tags": ["Miniatura", "Diorama", "Colecionável", "Frágil", "Com luz UV"],
+         "preco": 20,
+         "moeda": "€"
+      },
+		{
+         "id": "06",
+         "nome": "Elmo Romano - pintado a mão",
+         "descricao": "Elmo Romano - pintado a mão",
+         "comprimento": 94,
+         "largura": 50.5,
+         "altura": 113,
+         "filamento": "PLA",
+         "imagem": "img/produtos/portfolio06.png",
+         "tags": ["Miniatura", "Colecionável", "Peça decorativa", "Frágil"],
+         "preco": 50,
+         "moeda": "€"
+      }
+   ]
+}

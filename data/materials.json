@@ -1,0 +1,25 @@
+{
+   "materiais":[
+      {
+         "tipo":"PLA",
+         "nome":"PLA (Ácido Polilático)",
+         "tempMin":-10,
+         "tempMax":50,
+         "camaraFechada":false
+      },
+      {
+         "tipo":"PETG",
+         "nome":"PETG (Polietileno Tereftalato Glicol)",
+         "tempMin":-20,
+         "tempMax":75,
+         "camaraFechada":false
+      },
+      {
+         "tipo":"ABS",
+         "nome":"ABS (Acrilonitrila Butadieno Estireno)",
+         "tempMin":-20,
+         "tempMax":85,
+         "camaraFechada":true
+      }
+   ]
+}

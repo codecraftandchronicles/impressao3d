@@ -6,6 +6,8 @@
 // Global state
 let appState = {
     products: [],
+    portfolio: [],
+    materiais: [],
     testimonials: [],
     productsToShow: 12,
     currentPage: 1,
@@ -55,19 +57,21 @@ let appState = {
                 'Conversão de foto para 3D',
                 'Placas de identificação e tags',
                 'Materiais promocionais',
-                'Presentes de casamento e eventos'
+                'Presentes de casamento e eventos',
+                'Peças com várias cores podem ter acréscimo no valor'
             ]
         },
         {
-            id: 'prototipagem',
-            icon: 'fa-flask',
-            titulo: 'Prototipagem',
+            id: 'pintura-dioramas',
+            icon: 'fa-palette',
+            titulo: 'Pintura & Dioramas',
             items: [
-                'Conceito para objeto em tempo real',
-                'Tolerâncias de precisão industrial',
-                'Assembly multi-material',
-                'Projetos protegidos por NDA',
-                'Suporte iterativo e revisões'
+                'Pintura 100% à mão, camada a camada',
+                'Dioramas e Maquetes temáticos personalizados',
+                'Cenários: neve, rocha, água, fogo, lama, lava',
+                'Acabamentos com luz LED ou UV',
+                'Peças de coleção, prontas a expor',
+                'Traga a sua peça: pintamos miniaturas e bustos que já tem em casa'
             ]
         },
         {
@@ -99,13 +103,15 @@ let appState = {
             url: 'https://instagram.com/medievalcraftsforge',
             icon: 'fab fa-instagram'
         }
-    }
+    },
+    deliveryInfo: 'Prazo médio de produção: 1 a 3 dias úteis, consoante a complexidade da peça e quantidade solicitada. Após produção, entregamos por levantamento no local ou envio pelos CTT (mais 1 a 3 dias úteis). Não fazemos entregas pessoais.'
 };
 
 // Initialize application
 document.addEventListener('DOMContentLoaded', () => {
     loadData();
     renderServices();
+    renderDeliveryInfo();
     setupEventListeners();
 });
 
@@ -119,6 +125,16 @@ async function loadData() {
         const productsData = await productsResponse.json();
         appState.products = productsData.produtos;
 
+        // Load materiais (dados técnicos de filamento)
+        const materiaisResponse = await fetch('data/materials.json');
+        const materiaisData = await materiaisResponse.json();
+        appState.materiais = materiaisData.materiais;
+
+        // Load portfolio (trabalhos personalizados sob encomenda)
+        const portfolioResponse = await fetch('data/portfolio.json');
+        const portfolioData = await portfolioResponse.json();
+        appState.portfolio = portfolioData.portfolio;
+
         // Load testimonials
         const testimonialsResponse = await fetch('data/testimonials.json');
         const testimonialsData = await testimonialsResponse.json();
@@ -126,6 +142,7 @@ async function loadData() {
 
         // Render sections
         renderProducts();
+        renderPortfolio();
         renderTestimonials();
     } catch (error) {
         console.error('Erro ao carregar dados:', error);
@@ -153,6 +170,69 @@ function renderServices() {
 }
 
 /**
+ * Render Delivery Info (prazo de entrega)
+ */
+function renderDeliveryInfo() {
+    const el = document.getElementById('delivery-info');
+    if (!el) return;
+    el.innerHTML = `<i class="fas fa-truck"></i> ${appState.deliveryInfo}`;
+}
+
+/**
+ * Render Portfolio Section (peças personalizadas, sem preço)
+ */
+function renderPortfolio() {
+    const grid = document.getElementById('portfolio-grid');
+    if (!grid) return;
+
+    grid.innerHTML = appState.portfolio.map(item => {
+        const material = appState.materiais.find(m => m.tipo === item.filamento);
+        const tempInfo = material
+            ? `Aguenta de ${material.tempMin}°C a ${material.tempMax}°C`
+            : '';
+        const nomeEscaped = item.nome.replace(/'/g, "\\'");
+        const isUnique = !!(item.preco && item.preco > 0);
+
+        return `
+        <div class="product-card">
+            <img src="${item.imagem}" alt="${item.nome}" class="product-image" onerror="this.src='img/error.png'">
+            <div class="product-info">
+                ${isUnique ? `<span class="unique-badge"><i class="fas fa-gem"></i> Peça Única</span>` : ''}
+                <h3 class="product-name">${item.nome}</h3>
+                <span class="product-dimensions">
+                    <i class="fas fa-ruler-combined"></i>
+                    ${(item.comprimento || item.largura || item.altura)
+                        ? `${item.comprimento} x ${item.largura} x ${item.altura} mm`
+                        : 'Diversos tamanhos'}
+                </span>
+                ${isUnique ? '' : `
+                <span class="product-filament">
+                    <i class="fas fa-thermometer-half"></i>
+                    ${item.filamento}${tempInfo ? ` · ${tempInfo}` : ''}
+                </span>`}
+                <span class="product-usage">
+                    <i class="fas fa-triangle-exclamation"></i>
+                    ${(item.tags && item.tags.length) ? item.tags.join(' · ') : 'Peça decorativa'}
+                </span>
+                ${isUnique
+                    ? `<div class="product-price">
+                        <span class="price-tag">${item.preco}${item.moeda || '€'}</span>
+                        <span class="price-note">Peça original, pintada à mão — apenas 1 disponível</span>
+                       </div>
+                       <button class="product-btn" onclick="requestUniquePiece('${nomeEscaped}', '${item.preco}${item.moeda || '€'}')">
+                        Comprar esta peça única
+                       </button>`
+                    : `<button class="product-btn" onclick="requestCustomPiece('${nomeEscaped}')">
+                        Também quero um personalizado para mim
+                       </button>`
+                }
+            </div>
+        </div>
+    `;
+    }).join('');
+}
+
+/**
  * Render Products Section (com Load More)
  */
 function renderProducts() {
@@ -170,22 +250,47 @@ function renderProducts() {
     // Mostra apenas os produtos até productsToShow
     const visible = sorted.slice(0, appState.productsToShow);
 
-    grid.innerHTML = visible.map(product => `
+    grid.innerHTML = visible.map(product => {
+        const material = appState.materiais.find(m => m.tipo === product.filamento);
+        const tempInfo = material
+            ? `Aguenta de ${material.tempMin}°C a ${material.tempMax}°C`
+            : '';
+        const usoIcon = product.uso === 'Externo' ? 'fa-cloud-sun' : 'fa-house';
+
+        return `
         <div class="product-card">
             <img src="${product.imagem}" alt="${product.nome}" class="product-image" onerror="this.src='img/error.png'">
             <div class="product-info">
                 <span class="product-ref">Ref: ${product.id}</span>
-                <h3 class="product-name">${product.nome}</h3>
+                <h3 class="product-name">${product.nome} <span class="product-unit">(unidade)</span></h3>
+                <span class="product-dimensions">
+                    <i class="fas fa-ruler-combined"></i>
+                    ${(product.comprimento || product.largura || product.altura)
+                        ? `Tamanho padrão: ${product.comprimento} x ${product.largura} x ${product.altura} mm <br>(também fazemos à sua medida)`
+                        : 'Diversos tamanhos (também fazemos à sua medida)'}
+                </span>
+                <span class="product-filament">
+                    <i class="fas fa-thermometer-half"></i>
+                    ${product.filamento}${tempInfo ? ` · ${tempInfo}` : ''}
+                </span>
+                <span class="product-usage">
+                    <i class="fas ${usoIcon}"></i>
+                    Uso ${product.uso}
+                </span>
                 <div class="product-price">
-                    <span class="price-tag">A partir de ${product.precoRef}${product.moeda}</span>
+                    ${product.precoRef > 0
+                        ? `<span class="price-tag">A partir de ${product.precoRef}${product.moeda}</span>`
+                        : `<span class="price-tag price-oncall">Apenas sob encomenda</span>`}
                     <span class="price-discount">Descontos em volume</span>
+                    <span class="price-note">Preço para 1 cor</span>
                 </div>
                 <button class="product-btn" onclick="openContactChannel('whatsapp')">
                     Solicitar Orçamento
                 </button>
             </div>
         </div>
-    `).join('');
+    `;
+    }).join('');
 
     // Mostra/esconde botão "Carregar Mais"
     const loadMoreBtn = document.getElementById('load-more-btn');
@@ -273,6 +378,22 @@ function openContactChannel(channel) {
     if (appState.contactChannels[channel]) {
         window.open(appState.contactChannels[channel].url, '_blank');
     }
+}
+
+/**
+ * Solicitar peça personalizada a partir do Portfólio
+ */
+function requestCustomPiece(nomeReferencia) {
+    const texto = encodeURIComponent(`Olá Medieval Crafts Forge, vi o trabalho "${nomeReferencia}" e também gostaria de um personalizado para mim.`);
+    window.open(`https://wa.me/351910663727?text=${texto}`, '_blank');
+}
+
+/**
+ * Solicitar compra de peça única (artesanato, não reproduzível)
+ */
+function requestUniquePiece(nomeReferencia, preco) {
+    const texto = encodeURIComponent(`Olá Medieval Crafts Forge, tenho interesse em comprar a peça única "${nomeReferencia}" (${preco}). Ainda está disponível?`);
+    window.open(`https://wa.me/351910663727?text=${texto}`, '_blank');
 }
 
 /**
