@@ -4,21 +4,21 @@
       "id": "test-001",
       "descricao": "Solicitei chaveiros personalizados para um evento do grupo de mulheres da igreja. A Medieval Crafts Forge entregou tudo no prazo, mesmo com o tempo curto. Além disso, os produtos foram pintados à mão, com um toque único. Recomendo!",
       "nome": "Alexandre Bernardino",
-      "empresa": "null",
+      "empresa": null,
       "tipo": "pessoal"
     },
     {
       "id": "test-002",
       "descricao": "Encomendei um chaveiro temático do One Piece. O resultado foi excelente: pintado à mão, com precisão nos detalhes e qualidade impecável. Super satisfeito!",
       "nome": "Thiago Silva",
-      "empresa": "null",
+      "empresa": null,
       "tipo": "pessoal"
     },
     {
       "id": "test-004",
       "descricao": "Solicitei a impressão do versículo bíblico 2 Pedro 3:18 (ARC) para decorar a parede do Ministério Infantil. A impressão foi de ótima qualidade, e o resultado final superou as expectativas. Ficou lindo!",
       "nome": "Ana Machado",
-      "empresa": "null",
+      "empresa": null,
       "tipo": "pessoal"
     }
   ]
