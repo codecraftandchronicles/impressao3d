@@ -2,7 +2,7 @@
    "produtos": [
       {
          "id": "01",
-         "nome": "Caixa protetora para eletrônica",
+         "nome": "Caixa protetora para eletrónica",
          "descricao": "Caixa protetora para eletrónica, ideal para projetos com Raspberry Pi ou Arduino",
          "comprimento": 96.4,
          "largura": 63.4,

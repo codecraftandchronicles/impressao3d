@@ -130,7 +130,7 @@ No ficheiro `css/style.css`, ajusta as variáveis de raiz:
 
 A aplicação está configurada para:
 
-- **WhatsApp**: `+351 910 663 727`
+- **WhatsApp**: `+351 934 651 945`
 - **Email**: `preciousabstraction@gmail.com`
 - **Instagram**: `@medievalcraftsforge`
 
