@@ -54,7 +54,7 @@ let appState = {
             titulo: 'Pintura & Dioramas',
             items: [
                 'Pintura 100% à mão, camada a camada',
-                'Maquetes temáticos personalizados',
+                'Maquetes temáticas personalizados',
                 'Acabamentos com luz LED ou UV',
                 'Peças de coleção, prontas a expor',
                 'Traga a sua peça: pintamos miniaturas e bustos que já tem em casa'
