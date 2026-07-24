@@ -67,13 +67,13 @@
       },
       {
          "id": "08",
-         "nome": "Organizador de Gaveta Compartimentado",
+         "nome": "Organizador de Gaveta Compartimentado - preço por nicho",
          "descricao": "Bandeja organizadora com múltiplos compartimentos para pequenos objetos",
          "comprimento": 0,
          "largura": 0,
          "altura": 0,
          "filamento": "PLA",
-         "precoRef": 9.74,
+         "precoRef": 1.23,
          "moeda": "€",
          "imagem": "img/produtos/organizadores01.webp",
          "uso": "Interno"
@@ -489,7 +489,7 @@
          "largura": 75,
          "altura": 94.6,
          "filamento": "PLA",
-         "precoRef": 1.65,
+         "precoRef": 1.72,
          "moeda": "€",
          "imagem": "img/produtos/suporte01.png",
          "uso": "Interno"
